@@ -1,0 +1,172 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-pigeon-heading" data-cy="PigeonCreateUpdateHeading" jhiTranslate="pigeonal001App.pigeon.home.createOrEditLabel">
+        Create or edit a Pigeon
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="pigeonal001App.pigeon.ringNumber" for="field_ringNumber">Ring Number</label>
+          <input
+            type="text"
+            class="form-control"
+            name="ringNumber"
+            id="field_ringNumber"
+            data-cy="ringNumber"
+            formControlName="ringNumber"
+          />
+          @if (editForm.get('ringNumber')!.invalid && (editForm.get('ringNumber')!.dirty || editForm.get('ringNumber')!.touched)) {
+            <div>
+              @if (editForm.get('ringNumber')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="pigeonal001App.pigeon.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="pigeonal001App.pigeon.breeder" for="field_breeder">Breeder</label>
+          <input type="text" class="form-control" name="breeder" id="field_breeder" data-cy="breeder" formControlName="breeder" />
+          @if (editForm.get('breeder')!.invalid && (editForm.get('breeder')!.dirty || editForm.get('breeder')!.touched)) {
+            <div>
+              @if (editForm.get('breeder')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="pigeonal001App.pigeon.gender" for="field_gender">Gender</label>
+          <select class="form-control" name="gender" formControlName="gender" id="field_gender" data-cy="gender">
+            <option [ngValue]="null">{{ 'pigeonal001App.Gender.null' | translate }}</option>
+            @for (gender of genderValues; track $index) {
+              <option [value]="gender">{{ 'pigeonal001App.Gender.' + gender | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="pigeonal001App.pigeon.birthYear" for="field_birthYear">Birth Year</label>
+          <input type="number" class="form-control" name="birthYear" id="field_birthYear" data-cy="birthYear" formControlName="birthYear" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="pigeonal001App.pigeon.colorPattern" for="field_colorPattern">Color Pattern</label>
+          <select class="form-control" name="colorPattern" formControlName="colorPattern" id="field_colorPattern" data-cy="colorPattern">
+            <option [ngValue]="null">{{ 'pigeonal001App.ColorPattern.null' | translate }}</option>
+            @for (colorPattern of colorPatternValues; track $index) {
+              <option [value]="colorPattern">{{ 'pigeonal001App.ColorPattern.' + colorPattern | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="pigeonal001App.pigeon.longDescription" for="field_longDescription"
+            >Long Description</label
+          >
+          <textarea
+            class="form-control"
+            name="longDescription"
+            id="field_longDescription"
+            data-cy="longDescription"
+            formControlName="longDescription"
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="pigeonal001App.pigeon.mediumDescription" for="field_mediumDescription"
+            >Medium Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="mediumDescription"
+            id="field_mediumDescription"
+            data-cy="mediumDescription"
+            formControlName="mediumDescription"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="pigeonal001App.pigeon.shortDescription" for="field_shortDescription"
+            >Short Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="shortDescription"
+            id="field_shortDescription"
+            data-cy="shortDescription"
+            formControlName="shortDescription"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="pigeonal001App.pigeon.mother" for="field_mother">Mother</label>
+          <select
+            class="form-control"
+            id="field_mother"
+            data-cy="mother"
+            name="mother"
+            formControlName="mother"
+            [compareWith]="comparePigeon"
+          >
+            <option [ngValue]="null"></option>
+            @for (pigeonOption of pigeonsSharedCollection; track $index) {
+              <option [ngValue]="pigeonOption">{{ pigeonOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="pigeonal001App.pigeon.father" for="field_father">Father</label>
+          <select
+            class="form-control"
+            id="field_father"
+            data-cy="father"
+            name="father"
+            formControlName="father"
+            [compareWith]="comparePigeon"
+          >
+            <option [ngValue]="null"></option>
+            @for (pigeonOption of pigeonsSharedCollection; track $index) {
+              <option [ngValue]="pigeonOption">{{ pigeonOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

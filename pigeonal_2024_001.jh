@@ -20,10 +20,6 @@ relationship ManyToOne {
     Pigeon{father} to Pigeon
 }
 
-relationship OneToMany {
-    User{pedigree(owner)} to Pedigree,
-    Pedigree{pigeon} to Pigeon{pedigree}
-}
 
 enum ColorPattern {
   BLUE_BAR,

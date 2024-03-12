@@ -1,0 +1,82 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (pigeon) {
+      <div>
+        <h2 data-cy="pigeonDetailsHeading"><span jhiTranslate="pigeonal001App.pigeon.detail.title">Pigeon</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ pigeon.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="pigeonal001App.pigeon.ringNumber">Ring Number</span></dt>
+          <dd>
+            <span>{{ pigeon.ringNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="pigeonal001App.pigeon.name">Name</span></dt>
+          <dd>
+            <span>{{ pigeon.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="pigeonal001App.pigeon.breeder">Breeder</span></dt>
+          <dd>
+            <span>{{ pigeon.breeder }}</span>
+          </dd>
+          <dt><span jhiTranslate="pigeonal001App.pigeon.gender">Gender</span></dt>
+          <dd>
+            <span jhiTranslate="{{ 'pigeonal001App.Gender.' + pigeon.gender }}">{{ pigeon.gender }}</span>
+          </dd>
+          <dt><span jhiTranslate="pigeonal001App.pigeon.birthYear">Birth Year</span></dt>
+          <dd>
+            <span>{{ pigeon.birthYear }}</span>
+          </dd>
+          <dt><span jhiTranslate="pigeonal001App.pigeon.colorPattern">Color Pattern</span></dt>
+          <dd>
+            <span jhiTranslate="{{ 'pigeonal001App.ColorPattern.' + pigeon.colorPattern }}">{{ pigeon.colorPattern }}</span>
+          </dd>
+          <dt><span jhiTranslate="pigeonal001App.pigeon.longDescription">Long Description</span></dt>
+          <dd>
+            <span>{{ pigeon.longDescription }}</span>
+          </dd>
+          <dt><span jhiTranslate="pigeonal001App.pigeon.mediumDescription">Medium Description</span></dt>
+          <dd>
+            <span>{{ pigeon.mediumDescription }}</span>
+          </dd>
+          <dt><span jhiTranslate="pigeonal001App.pigeon.shortDescription">Short Description</span></dt>
+          <dd>
+            <span>{{ pigeon.shortDescription }}</span>
+          </dd>
+          <dt><span jhiTranslate="pigeonal001App.pigeon.mother">Mother</span></dt>
+          <dd>
+            @if (pigeon.mother) {
+              <div>
+                <a [routerLink]="['/pigeon', pigeon.mother.id, 'view']">{{ pigeon.mother.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="pigeonal001App.pigeon.father">Father</span></dt>
+          <dd>
+            @if (pigeon.father) {
+              <div>
+                <a [routerLink]="['/pigeon', pigeon.father.id, 'view']">{{ pigeon.father.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/pigeon', pigeon.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,25 @@
+export enum ColorPattern {
+  BLUE_BAR = 'BLUE_BAR',
+
+  BLACK_BAR = 'BLACK_BAR',
+
+  CHECKERED = 'CHECKERED',
+
+  RED_CHECKERED = 'RED_CHECKERED',
+
+  BLUE_CHECKERED = 'BLUE_CHECKERED',
+
+  SILVER = 'SILVER',
+
+  GRIZZLE = 'GRIZZLE',
+
+  PIED = 'PIED',
+
+  WHITE = 'WHITE',
+
+  RED = 'RED',
+
+  YELLOW = 'YELLOW',
+
+  UNKNOWN = 'UNKNOWN',
+}

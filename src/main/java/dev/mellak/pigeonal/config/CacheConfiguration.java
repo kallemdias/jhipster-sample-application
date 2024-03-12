@@ -48,6 +48,7 @@ public class CacheConfiguration {
             createCache(cm, dev.mellak.pigeonal.domain.User.class.getName());
             createCache(cm, dev.mellak.pigeonal.domain.Authority.class.getName());
             createCache(cm, dev.mellak.pigeonal.domain.User.class.getName() + ".authorities");
+            createCache(cm, dev.mellak.pigeonal.domain.Pigeon.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

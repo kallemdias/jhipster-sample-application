@@ -1,0 +1,69 @@
+{
+  "annotations": {
+    "changelogDate": "20240312184546"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "entityTableName": "pigeon",
+  "fields": [
+    {
+      "fieldName": "ringNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "breeder",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "gender",
+      "fieldType": "Gender",
+      "fieldValues": "MALE,FEMALE,UNKNOWN"
+    },
+    {
+      "fieldName": "birthYear",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "colorPattern",
+      "fieldType": "ColorPattern",
+      "fieldValues": "BLUE_BAR,BLACK_BAR,CHECKERED,RED_CHECKERED,BLUE_CHECKERED,SILVER,GRIZZLE,PIED,WHITE,RED,YELLOW,UNKNOWN"
+    },
+    {
+      "fieldName": "longDescription",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "mediumDescription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "shortDescription",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Pigeon",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "pigeon",
+      "relationshipName": "mother",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "pigeon",
+      "relationshipName": "father",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

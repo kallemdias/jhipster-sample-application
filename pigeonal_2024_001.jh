@@ -1,0 +1,51 @@
+entity Pigeon {
+	
+    ringNumber String required,
+    name String,
+    breeder String required,
+    gender Gender,
+    birthYear Integer,
+  	colorPattern ColorPattern,
+  	longDescription TextBlob,
+  	mediumDescription String,
+  	shortDescription String
+}
+
+enum Gender {
+  MALE, FEMALE, UNKNOWN
+}
+
+relationship ManyToOne {
+    Pigeon{mother} to Pigeon,
+    Pigeon{father} to Pigeon
+}
+
+relationship OneToMany {
+    User{pedigree(owner)} to Pedigree,
+    Pedigree{pigeon} to Pigeon{pedigree}
+}
+
+enum ColorPattern {
+  BLUE_BAR,
+  BLACK_BAR,
+  CHECKERED,
+  RED_CHECKERED,
+  BLUE_CHECKERED,
+  SILVER,
+  GRIZZLE,
+  PIED,
+  WHITE,
+  RED,
+  YELLOW,
+  UNKNOWN // Falls das Muster nicht identifiziert werden kann oder eine andere Farbe hat, die nicht aufgelistet ist
+}
+
+
+// Set pagination options
+paginate Pigeon with pagination
+
+// DTOs
+dto * with mapstruct
+
+// Service layer
+service all with serviceClass
